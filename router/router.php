@@ -8,10 +8,7 @@ class Router
     private  $params = [];
     private  $routeFound;
     private  $body;
-    private  $errorStr = 'API not found';
-    private  $errorCode = 404;
     private  $hasAccess = true;
-    private $errorStrNotFound = "403";
 
 
     public function __construct()
@@ -32,6 +29,7 @@ class Router
         }
         $access = array_search(true, $middlewares);
         if ($access === false) {
+            $this->routeFound = true;
             $this->hasAccess = false;
         }
         return $access !== false;
@@ -118,7 +116,7 @@ class Router
             $errorMsg = "API not found";
             $errorCode = 404;
         }
-        
+
         if (!$this->hasAccess) {
             $errorMsg = "No access";
             $errorCode = 403;
