@@ -11,6 +11,7 @@ class Router
     private  $errorStr = 'API not found';
     private  $errorCode = 404;
     private  $hasAccess = true;
+    private $errorStrNotFound = "403";
 
 
     public function __construct()
@@ -23,7 +24,7 @@ class Router
         $this->version = $version;
     }
 
-    
+
     private function middlewares($middlewares)
     {
         if (count($middlewares) == 0) {
@@ -32,8 +33,6 @@ class Router
         $access = array_search(true, $middlewares);
         if ($access === false) {
             $this->hasAccess = false;
-            $this->errorStr = 'Usuario sin acceso';
-            $this->errorCode = 403;
         }
         return $access !== false;
     }
@@ -113,15 +112,25 @@ class Router
 
     public function default($callback)
     {
-        if ($this->routeFound == false) {
-            $callback(
-                (object) [
-                    "message" => $this->errorStr,
-                    "statusCode" => $this->errorCode,
-                    "hasAccess" => $this->hasAccess
-                ]
-            );
+        $errorMsg = "";
+        $errorCode = "";
+        if (!$this->routeFound) {
+            $errorMsg = "API not found";
+            $errorCode = 404;
         }
+        
+        if (!$this->hasAccess) {
+            $errorMsg = "No access";
+            $errorCode = 403;
+        }
+
+        $callback(
+            (object) [
+                "message" => $errorMsg,
+                "statusCode" => $errorCode,
+                "hasAccess" => $this->hasAccess
+            ]
+        );
     }
 
     private function executeThisURL()
