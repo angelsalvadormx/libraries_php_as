@@ -1,5 +1,6 @@
 <?php
 
+include_once('response.php');
 class Router
 {
 
@@ -35,76 +36,65 @@ class Router
         return $access !== false;
     }
 
+    private function callbackFn($callback, $method)
+    {
+        $req['params'] = (object) $this->params;
+        if (in_array($method, ["POST", "PUT"])) {
+            $req['body'] = (object) $this->body;
+        }
+        $res = new Response();
+        $callback((object) $req, $res);
+    }
+
     public function get($URL, $callback, $middlewares = [])
     {
-        if ($_SERVER['REQUEST_METHOD'] != 'GET') {
+        $method = $_SERVER['REQUEST_METHOD'];
+        if ($method != 'GET') {
             return;
         }
 
-        if (!$this->middlewares($middlewares)) {
-            return;
-        }
-
-        $this->setRoute($URL);
-        if ($this->executeThisURL()) {
-            $req['params'] = (object) $this->params;
-            $callback((object) $req);
+        if ($this->executeThisURL($URL, $middlewares)) {
+            $this->callbackFn($callback, $method);
             return;
         };
     }
 
+
     public function delete($URL, $callback, $middlewares = [])
     {
-        if ($_SERVER['REQUEST_METHOD'] != 'DELETE') {
+        $method = $_SERVER['REQUEST_METHOD'];
+        if ($method != 'DELETE') {
             return;
         }
 
-        if (!$this->middlewares($middlewares)) {
-            return;
-        }
-
-        $this->setRoute($URL);
-        if ($this->executeThisURL()) {
-            $req['params'] = (object) $this->params;
-            $callback((object) $req);
+        if ($this->executeThisURL($URL, $middlewares)) {
+            $this->callbackFn($callback, $method);
             return;
         };
     }
 
     public function post($URL, $callback, $middlewares = [])
     {
-        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+        $method = $_SERVER['REQUEST_METHOD'];
+        if ($method != 'POST') {
             return;
         }
-        if (!$this->middlewares($middlewares)) {
-            return;
-        }
-        $this->setRoute($URL);
-        if ($this->executeThisURL()) {
-            $req['params'] = (object) $this->params;
-            $req['body'] = (object) $this->body;
 
-            $callback((object) $req);
+        if ($this->executeThisURL($URL, $middlewares)) {
+            $this->callbackFn($callback, $method);
             return;
         }
     }
 
     public function put($URL, $callback, $middlewares = [])
     {
-        if ($_SERVER['REQUEST_METHOD'] != 'PUT') {
+        $method = $_SERVER['REQUEST_METHOD'];
+        if ($method != 'PUT') {
             return;
         }
 
-        if (!$this->middlewares($middlewares)) {
-            return;
-        }
-
-        $this->setRoute($URL);
-        if ($this->executeThisURL()) {
-            $req['params'] = (object) $this->params;
-            $req['body'] = (object) $this->body;
-
-            $callback((object) $req);
+        if ($this->executeThisURL($URL, $middlewares)) {
+            $this->callbackFn($callback, $method);
         }
     }
 
@@ -116,25 +106,32 @@ class Router
             $errorMsg = "API not found";
             $errorCode = 404;
         }
-
         if (!$this->hasAccess) {
-            $errorMsg = "No access";
+            $errorMsg = "Sin acceso";
             $errorCode = 403;
         }
 
+        $res = new Response();
         $callback(
             (object) [
                 "message" => $errorMsg,
                 "statusCode" => $errorCode,
                 "hasAccess" => $this->hasAccess
-            ]
+            ],
+            $res
         );
     }
 
-    private function executeThisURL()
+    private function executeThisURL($URL, $middlewares)
     {
-        $response = $this->start();
-        return $response;
+        $accces = $this->middlewares($middlewares);
+
+        if (!$accces) {
+            return false;
+        }
+
+        $this->setRoute($URL);
+        return $this->start();
     }
     public function setRoute($routeName)
     {
@@ -181,6 +178,10 @@ class Router
     public function start()
     {
         $foundRoute = false;
+        if (!isset($_GET['path'])) {
+            return $foundRoute;
+        }
+
         $currentURL = isset($_GET['path']) ? $_GET['path'] : explode("index.php", $_SERVER['REQUEST_URI'])[1];
         // remove first / 
         $currentURL = isset($_GET['path']) ? $currentURL :  substr($currentURL, 1);
@@ -189,7 +190,6 @@ class Router
         foreach ($this->routes as $route) {
             $routeSize = count(explode('/', $route->url));
             $routeUrlSplited = explode('/', $route->url);
-            //var_dump($route->url);
             if ($sizeURL == $routeSize && $this->hasSameParams($urlSplited, $routeUrlSplited) && $this->isSameURLString($urlSplited, $routeUrlSplited)) {
                 foreach ($routeUrlSplited as $key => $item) {
                     if (strpos($item, ':') !== false) {
