@@ -1,33 +1,36 @@
 # Template Router
 
+Nota: htaccess no funciona en servidores nginx,
+
+#### Ruta en servidor apache 
+http://localhost/api/v1/test
+
+#### Ruta en servidor nginx
+http://localhost/api/index.php/v1/test
+
 ### Todas las rutas deben comenzar con un /, ejemplo /test
 ```php
 $Router->get('/test', function () {
 ```
 
-### El callback de las ruta debe tener un die() al final
-
-#### Usando la funcion **responseRequest**
-Para activar el die, basta con poner en true el tercer parametro
+### El callback de las ruta debe tener un response 
 ```php
-$Router->get('/test', function () {
-  responseRequest(200, 'succces', true, []);
-});
-```
-
-#### Usando die()
-```php
-$Router->get('/test', function () {
-
- echo json_encode(["status"=> 200, "message" => 'succes', "data" => []]);
- die();
+$Router->get("/alumnos", function ($req, $res) {
+  // incluir el controlador
+  include_once(CONTROLLER_PATH . "alumnos.controller.php");
+  // Crear instancia de la clase
+  $alumno = new AlumnosController();
+  // mandar respuesta
+  $res->response(200, "Success 2");
 });
 ```
 
 ### Si una ruta no se encuentra, existe el metodo default
 Esta debe ir despues de la ultima ruta agregada
 ```php
-$Router->default(function () {
+$Router->default(function ($req, $res) {
+  $res->response($req->statusCode, $req->message);
+});
 ```
 #### Ejemplo
 
@@ -36,12 +39,12 @@ $Router->get('/test', function () {
   responseRequest(200, 'succces', true, []);
 });
 
-$Router->dafault(function () {
-  responseRequest(404,'API not found',true);
+$Router->default(function ($req, $res) {
+  $res->response($req->statusCode, $req->message);
 });
 ```
 
-## Metodos existentes
+## Metodos http existentes
  GET 
 ```php
 $Router->get('/test', function () {
@@ -121,7 +124,7 @@ Todas las rutas que se escriban despues de esa linea de codigo seran version 2
  http://localhost/api/v2/test 
 
 
-### Config
+### Config (servidor apache)
  ```
 RewriteEngine On
 
