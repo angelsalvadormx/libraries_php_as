@@ -112,9 +112,7 @@ class Router
             $errorMsg = "API not found";
             $errorCode = 404;
         }
-
         if (!$this->hasAccess && $this->routeFound) {
-
             $errorMsg = "Sin acceso";
             $errorCode = 403;
         }
@@ -132,7 +130,6 @@ class Router
 
     private function executeThisURL($URL, $middlewares)
     {
-
         if($this->routeFound && $this->hasAccess ){
             return false;
         }
@@ -147,7 +144,6 @@ class Router
 
         unset($_GET['path']);
         return true;
-
     }
     public function setRoute($routeName, $hasAccess)
     {
@@ -198,14 +194,12 @@ class Router
     public function start()
     {
         $foundRoute = false;
-
         if($this->routeFound){
             return false;
         }
         // if (!isset($_GET['path'])) {
         //     return $foundRoute;
         // }
-
 
         $currentURL = isset($_GET['path']) ? $_GET['path'] : explode("index.php", $_SERVER['REQUEST_URI'])[1];
         // remove first / 
@@ -215,9 +209,7 @@ class Router
         foreach ($this->routes as $route) {
             $routeSize = count(explode('/', $route->url));
             $routeUrlSplited = explode('/', $route->url);
-
             if ($sizeURL == $routeSize && $this->hasSameParams($urlSplited, $routeUrlSplited) && $this->isSameURLString($urlSplited, $routeUrlSplited) && $route->hasAccess) {
-
                 foreach ($routeUrlSplited as $key => $item) {
                     if (strpos($item, ':') !== false) {
                         $valuePram = $urlSplited[$key];
