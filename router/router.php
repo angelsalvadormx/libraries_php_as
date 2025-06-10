@@ -8,8 +8,9 @@ class Router
     private  $version = 'v1';
     private  $params = [];
     private  $routeFound = false;
+    private  $hasAccess = null;
     private  $body;
-    private  $hasAccess = false;
+    private  $existsRute = false;
 
 
     public function __construct()
@@ -33,9 +34,9 @@ class Router
 
             $this->hasAccess = false;
         }
-        
+
         $hasAccess = $access !== false;
-        if($hasAccess){
+        if ($hasAccess) {
             $this->hasAccess = true;
         }
 
@@ -108,13 +109,11 @@ class Router
     {
         $errorMsg = "";
         $errorCode = "";
-        if (!$this->routeFound) {
+        if (!$this->existsRute) {
             $errorMsg = "API not found";
             $errorCode = 404;
         }
-
-        if (!$this->hasAccess && $this->routeFound) {
-
+        if ($this->existsRute && $this->hasAccess == false) {
             $errorMsg = "Sin acceso";
             $errorCode = 403;
         }
@@ -132,22 +131,28 @@ class Router
 
     private function executeThisURL($URL, $middlewares)
     {
-
-        if($this->routeFound && $this->hasAccess ){
-            return false;
-        }
+        // if ($this->routeFound) {
+        //     return false;
+        // }
 
         $accces = $this->middlewares($middlewares);
-        $this->setRoute($URL, $accces);
-        $existsRute = $this->start();
+        // $this->setRoute($URL, $accces);
+        $existsRute = $this->existeURL($this->version . $URL);
 
-        if(!$accces || !$existsRute){
-            return false;
+        if ($existsRute) {
+            $this->existsRute = true;
         }
+        if ($existsRute && $accces) {
+            $this->routeFound = true;
+            return true;
+        }
+        return false;
 
-        unset($_GET['path']);
-        return true;
+        // if (!$accces || !$existsRute) {
+        //     return false;
+        // }
 
+        // return true;
     }
     public function setRoute($routeName, $hasAccess)
     {
@@ -186,53 +191,55 @@ class Router
 
     private function isSameURLString($currentURLSplited, $routeUrlSplited)
     {
-        $isSame = true;
+
         foreach ($routeUrlSplited as $key => $item) {
             if (strpos($item, ':') !== false) {
                 $currentURLSplited[$key] = $item;
             }
         }
-        $isSame = count(array_diff($currentURLSplited, $routeUrlSplited)) == 0;
+        $strCurrentRoute = implode("/", $currentURLSplited);
+        $strRoute = implode("/", $routeUrlSplited);
+        $hasSameOrder = $strCurrentRoute == $strRoute;
+
+        $isSame = count(array_diff($currentURLSplited, $routeUrlSplited)) == 0 && $hasSameOrder;
         return $isSame;
     }
-    public function start()
+
+    public function existeURL($urlRequest)
     {
-        $foundRoute = false;
-
-        if($this->routeFound){
-            return false;
-        }
-        // if (!isset($_GET['path'])) {
-        //     return $foundRoute;
+        $found = false;
+        // if ($this->routeFound) {
+        //     return false;
         // }
-
 
         $currentURL = isset($_GET['path']) ? $_GET['path'] : explode("index.php", $_SERVER['REQUEST_URI'])[1];
         // remove first / 
         $currentURL = isset($_GET['path']) ? $currentURL :  substr($currentURL, 1);
         $urlSplited = explode('/', $currentURL);
         $sizeURL = count($urlSplited);
-        foreach ($this->routes as $route) {
-            $routeSize = count(explode('/', $route->url));
-            $routeUrlSplited = explode('/', $route->url);
+        // foreach ($this->routes as $route) {
+        $routeSize = count(explode('/', $urlRequest));
+        $routeUrlSplited = explode('/', $urlRequest);
+        if ($sizeURL == $routeSize && $this->hasSameParams($urlSplited, $routeUrlSplited) && $this->isSameURLString($urlSplited, $routeUrlSplited)) {
+            // if ($route->hasAccess) {
 
-            if ($sizeURL == $routeSize && $this->hasSameParams($urlSplited, $routeUrlSplited) && $this->isSameURLString($urlSplited, $routeUrlSplited) && $route->hasAccess) {
+            foreach ($routeUrlSplited as $key => $item) {
+                if (strpos($item, ':') !== false) {
+                    $valuePram = $urlSplited[$key];
+                    $namePram = explode(':', $item)[1];
 
-                foreach ($routeUrlSplited as $key => $item) {
-                    if (strpos($item, ':') !== false) {
-                        $valuePram = $urlSplited[$key];
-                        $namePram = explode(':', $item)[1];
-
-                        $this->params[$namePram] = $valuePram;
-                    }
+                    $this->params[$namePram] = $valuePram;
                 }
-
-                $this->params['extraParms'] = $_GET;
-                $this->body = json_decode(file_get_contents('php://input'));
-                $foundRoute = true;
             }
+
+            $this->params['extraParms'] = $_GET;
+            $this->body = json_decode(file_get_contents('php://input'));
+            $found = true;
+            // }
+            // $this->existsRute = true;
         }
-        $this->routeFound = $foundRoute;
-        return $foundRoute;
+        // }
+        return $found;
+        // return $this->existsRute;
     }
 }
