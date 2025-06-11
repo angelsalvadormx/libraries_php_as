@@ -1,62 +1,75 @@
 {
 	"info": {
-		"_postman_id": "fffd7c01-480e-498d-9aeb-c09a86f3e85f",
-		"name": "VUAMM - Nomina",
+		"_postman_id": "c4ccf0e2-b6fa-4e59-8064-6005a70381bb",
+		"name": "Expediente Electronico",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4500572"
 	},
 	"item": [
 		{
-			"name": "Catalogo - Conceptos",
+			"name": "Catalogos",
 			"item": [
 				{
-					"name": "catalogo/tipoConceptos",
+					"name": "tipoTrabajador",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}{{path_host}}/api/v1/catalogo/tipoConceptos",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/tipoTrabajador",
 							"host": [
-								"{{host}}{{path_host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
 								"catalogo",
-								"tipoConceptos"
+								"tipoTrabajador"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "catalogo/conceptos",
+					"name": "tipoTrabajador",
 					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}{{path_host}}/api/v1/catalogo/conceptos",
-							"host": [
-								"{{host}}{{path_host}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"catalogo",
-								"conceptos"
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Nomina - Token}}",
+									"type": "string"
+								}
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "catalogo/concepto",
-					"request": {
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_tipo_concepto\" : 1,\r\n    \"concepto\" : \"Sueldo\",\r\n    \"no_concepto\" : \"1\",\r\n    \"id_clave_sat\" : 1,\r\n    \"clave\": \"521\",\r\n    \"graba_isr\": 1\r\n}",
+							"raw": "{\r\n    \"tipo_trabajador\" : \"Empleado\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -64,48 +77,39 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}{{path_host}}/api/v1/catalogo/concepto",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/tipoTrabajador",
 							"host": [
-								"{{host}}{{path_host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
 								"catalogo",
-								"concepto"
+								"tipoTrabajador"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "catalogo/tipoConceptos",
+					"name": "tipoTrabajador",
 					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}{{path_host}}/api/v1/catalogo/clavesSat",
-							"host": [
-								"{{host}}{{path_host}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"catalogo",
-								"clavesSat"
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Nomina - Token}}",
+									"type": "string"
+								}
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "catalogo/concepto/:id_concept",
-					"request": {
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_tipo_concepto\" : 1,\r\n    \"concepto\" : \"Sueldo 2\",\r\n    \"no_concepto\" : \"1\",\r\n    \"id_clave_sat\" : 1\r\n}",
+							"raw": "{\r\n    \"id_tipo_trabajador\": 1,\r\n    \"tipo_trabajador\" : \"is not a test\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -113,15 +117,189 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}{{path_host}}/api/v1/catalogo/concepto/1",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/tipoTrabajador",
 							"host": [
-								"{{host}}{{path_host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
 								"catalogo",
-								"concepto",
+								"tipoTrabajador"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/catalogo/parentesco",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/parentesco",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"catalogo",
+								"parentesco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/catalogo/estadoCivil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"estado_civil\":\"Soltero\"   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/estadoCivil",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"catalogo",
+								"estadoCivil"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/catalogo/estadoCivil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/estadoCivil",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"catalogo",
+								"estadoCivil"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/catalogo/estadoCivil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n            \"id_estado_civil\": 1,\r\n            \"estado_civil\": \"Solteroooo\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/estadoCivil",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"catalogo",
+								"estadoCivil"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/catalogo/estadoCivil/:id_estado_civil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/estadoCivil/1",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"catalogo",
+								"estadoCivil",
 								"1"
 							]
 						}
@@ -129,13 +307,35 @@
 					"response": []
 				},
 				{
-					"name": "catalogo/concepto/:id_concept Copy",
+					"name": "v1/catalogo/regimenMatrimonial",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
-						"method": "DELETE",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_tipo_concepto\" : 1,\r\n    \"concepto\" : \"Sueldo 2\",\r\n    \"no_concepto\" : \"1\",\r\n    \"id_clave_sat\" : 1\r\n}",
+							"raw": "{\r\n    \"regimen_matrimonial\": \"test\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -143,34 +343,173 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}{{path_host}}/api/v1/catalogo/concepto/1",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/regimenMatrimonial",
 							"host": [
-								"{{host}}{{path_host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
 								"catalogo",
-								"concepto",
+								"regimenMatrimonial"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/catalogo/regimenMatrimonial",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/regimenMatrimonial",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"catalogo",
+								"regimenMatrimonial"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/catalogo/tipoDocumentos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/tipoDocumentosa",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"catalogo",
+								"tipoDocumentosa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/catalogo/regimenMatrimonial",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"id_regimen_matrimonial\": 1,\r\n            \"regimen_matrimonial\": \"test 2\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/regimenMatrimonial",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"catalogo",
+								"regimenMatrimonial"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/catalogo/regimenMatrimonial/:id_regimen_matrimonial",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/regimenMatrimonial/1",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"catalogo",
+								"regimenMatrimonial",
 								"1"
 							]
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Catalogo - Claves sat",
-			"item": [
+				},
 				{
-					"name": "catalogo/claveSat",
+					"name": "v1/catalogo/parentesco",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"clave_sat\" : \"2222\"\r\n}",
+							"raw": "{\r\n    \"parentesco\" : \"Padre\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -178,48 +517,39 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}{{path_host}}/api/v1/catalogo/claveSat",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/parentesco",
 							"host": [
-								"{{host}}{{path_host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
 								"catalogo",
-								"claveSat"
+								"parentesco"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "catalogo/clavesSat",
+					"name": "v1/catalogo/parentesco",
 					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}{{path_host}}/api/v1/catalogo/clavesSat",
-							"host": [
-								"{{host}}{{path_host}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"catalogo",
-								"clavesSat"
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "catalogo/claveSat/:id_clave_sat",
-					"request": {
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"clave_sat\" : \"111\"\r\n}",
+							"raw": "{\r\n    \"id_parentesco\": 3,\r\n    \"parentesco\": \"Hermano\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -227,71 +557,79 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}{{path_host}}/api/v1/catalogo/claveSat/3",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/parentesco",
 							"host": [
-								"{{host}}{{path_host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
 								"catalogo",
-								"claveSat",
-								"3"
+								"parentesco"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "catalogo/claveSat/:id_clave_sat",
+					"name": "v1/catalogo/parentesco/:id_parentesco",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}{{path_host}}/api/v1/catalogo/claveSat/3",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/parentesco/7",
 							"host": [
-								"{{host}}{{path_host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
 								"catalogo",
-								"claveSat",
-								"3"
+								"parentesco",
+								"7"
 							]
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Catalogo - Tarifas",
-			"item": [
+				},
 				{
-					"name": "catalogo/tarifasISR/:id_tarifa_isr",
+					"name": "v1/catalogo/tipoTrabajador/:id_tipo_trabajador",
 					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"limite_inferior\": 2.0,\r\n    \"limite_superior\": 3.0,\r\n    \"cuota_fija\": 30.0,\r\n    \"sobre_excedente\": 20.0,\r\n    \"subsidio\": 5.0\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
 								}
-							}
+							]
 						},
+						"method": "DELETE",
+						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/catalogo/tarifasISR/2",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/tipoTrabajador/2",
 							"host": [
-								"{{host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
 								"catalogo",
-								"tarifasISR",
+								"tipoTrabajador",
 								"2"
 							]
 						}
@@ -299,34 +637,23 @@
 					"response": []
 				},
 				{
-					"name": "catalogo/tarifasISR/Anios",
+					"name": "v1/catalogo/tipoPermisos",
 					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/v1/catalogo/tarifasISR/Anios",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"catalogo",
-								"tarifasISR",
-								"Anios"
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "catalogo/tarifasISR",
-					"request": {
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"anio\": 2024,\r\n    \"limite_inferior\": 1.0,\r\n    \"limite_superior\": 2.0,\r\n    \"cuota_fija\": 20.0,\r\n    \"sobre_excedente\": 20.0,\r\n    \"subsidio\": 5.0\r\n}",
+							"raw": "{\r\n    \"tipo_permiso\": \"Test\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -334,35 +661,193 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/catalogo/tarifasISR",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/tipoPermisos",
 							"host": [
-								"{{host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
 								"catalogo",
-								"tarifasISR"
+								"tipoPermisos"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "catalogo/tarifasISR/:id_tarifa_isr_anio",
+					"name": "v1/catalogo/tipoPermisos",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/catalogo/tarifasISR/1",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/tipoPermisos",
 							"host": [
-								"{{host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
 								"catalogo",
-								"tarifasISR",
+								"tipoPermisos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/catalogo/tipoPermiso",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_tipo_permiso\": 1,\r\n    \"tipo_permiso\": \"Test 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/tipoPermisos",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"catalogo",
+								"tipoPermisos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/catalogo/tipoPermiso/:id_tipo_permiso",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/tipoPermiso/1",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"catalogo",
+								"tipoPermiso",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contratos",
+			"item": [
+				{
+					"name": "v1/contrato",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_expediente\": 1,\r\n    \"fecha_inicio\": \"2025-03-15\",\r\n    \"fecha_fin\": \"2026-03-15\",\r\n    \"id_documento\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/contrato",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"contrato"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/contratos/:id_expediente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/contratos/1",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"contratos",
 								"1"
 							]
 						}
@@ -370,21 +855,70 @@
 					"response": []
 				},
 				{
-					"name": "catalogo/tarifasISR/:idRateISR",
+					"name": "v1/contrato",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_contrato\": 1,\r\n    \"fecha_inicio\": \"2025-03-15\",\r\n    \"fecha_fin\": \"2026-03-15\",\r\n    \"id_documento\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/contrato",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"contrato"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/contrato/:id_contrato",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/catalogo/tarifasISR/3",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/contrato/1",
 							"host": [
-								"{{host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
-								"catalogo",
-								"tarifasISR",
-								"3"
+								"contrato",
+								"1"
 							]
 						}
 					},
@@ -393,58 +927,133 @@
 			]
 		},
 		{
-			"name": "Prenomina",
+			"name": "Expediente",
 			"item": [
 				{
-					"name": "prenomina/:id_de_prenomina/empleado",
+					"name": "v1/expediente/:id_persona",
 					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/v1/prenomina/1/empleado",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"prenomina",
-								"1",
-								"empleado"
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
+								}
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "prenomina/:id_prenomina/empleados",
-					"request": {
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/prenomina/1/empleados",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/expediente/4",
 							"host": [
-								"{{host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
-								"prenomina",
-								"1",
-								"empleados"
+								"expediente",
+								"4"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "prenomina/empleado",
+					"name": "v1/expediente",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_expediente\": 1,\r\n    \"id_tipo_trabajador\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/expediente",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"expediente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/expediente/:id_persona/solicitud",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/expediente/4/solicitud",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"expediente",
+								"4",
+								"solicitud"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Datos vulnerables",
+			"item": [
+				{
+					"name": "v1/datosVulnerables",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_prenomina\" : 1,\r\n    \"id_empleado\": 1,\r\n    \"unidad\": 1.0,\r\n    \"importe\": 20.0\r\n}",
+							"raw": "{\r\n    \"enfermedades\": null,\r\n    \"medicaciones\": \"test\",\r\n    \"alergia_alimentos\": \"agua\",\r\n    \"alegia_medicamentos\": null,\r\n    \"discapacidades\": \"caminar\",\r\n    \"senas_particulares\": null,\r\n    \"id_expediente\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -452,116 +1061,45 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/prenomina/empleado",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/datosVulnerables",
 							"host": [
-								"{{host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
-								"prenomina",
-								"empleado"
+								"datosVulnerables"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "prenomina/:id_de_prenomina/empleado",
+					"name": "v1/datosVulnerables/:id_expediente",
 					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id_empleado\": 2,\r\n    \"unidad\": 1.0,\r\n    \"importe\": 20.0\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
 								}
-							}
+							]
 						},
-						"url": {
-							"raw": "{{host}}/api/v1/prenomina/1/empleado",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"prenomina",
-								"1",
-								"empleado"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "prenomina/:id_prenomina/concepto",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/v1/prenomina/1/concepto",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"prenomina",
-								"1",
-								"concepto"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "prenomina/:id_prenomina/concepto",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id_proceso\": 1,\r\n    \"id_concepto\": 2\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/v1/prenomina/1/concepto",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"prenomina",
-								"1",
-								"concepto"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "prenomina/conceptos/:id_proceso",
-					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/prenomina/conceptos/1",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/datosVulnerables/1",
 							"host": [
-								"{{host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
-								"prenomina",
-								"conceptos",
+								"datosVulnerables",
 								"1"
 							]
 						}
@@ -569,13 +1107,23 @@
 					"response": []
 				},
 				{
-					"name": "prenomina/concepto",
+					"name": "v1/datosVulnerables",
 					"request": {
-						"method": "POST",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_proceso\": 1,\r\n    \"id_concepto\": 1\r\n}",
+							"raw": " {\r\n        \"id_dato_vulnerable\": 1,\r\n        \"enfermedades\": null,\r\n        \"medicaciones\": \"test\",\r\n        \"alergia_alimentos\": \"agua\",\r\n        \"alegia_medicamentos\": \"paracetamol\",\r\n        \"discapacidades\": \"caminar\",\r\n        \"senas_particulares\": null,\r\n        \"id_expediente\": \"2\"\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -583,15 +1131,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/prenomina/concepto",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/datosVulnerables",
 							"host": [
-								"{{host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
-								"prenomina",
-								"concepto"
+								"datosVulnerables"
 							]
 						}
 					},
@@ -600,76 +1148,26 @@
 			]
 		},
 		{
-			"name": "Quincenas",
+			"name": "Contacto emergencia",
 			"item": [
 				{
-					"name": "quincenas",
+					"name": "v1/contactoEmergencia",
 					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}{{path_host}}/api/v1/quincenas",
-							"host": [
-								"{{host}}{{path_host}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"quincenas"
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Nomina - Token}}",
+									"type": "string"
+								}
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "create/quincenas/:año",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}{{path_host}}/api/v1/create/quincenas/2024",
-							"host": [
-								"{{host}}{{path_host}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"create",
-								"quincenas",
-								"2024"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "quincenas/:año",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}{{path_host}}/api/v1/quincenas/2024",
-							"host": [
-								"{{host}}{{path_host}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"quincenas",
-								"2024"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "quincena/extraordinaria",
-					"request": {
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"anio\": 2024,\r\n    \"id_mes\": 1,\r\n    \"mes\": \"Enero\",\r\n    \"dia_inicio\": 1,\r\n    \"dia_fin\": 15,\r\n    \"descripcion\": \"Pago extra a panchito\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"Juan perez\",\r\n    \"telefono\": \"3121421537\",\r\n    \"telefono_2\": null,\r\n    \"id_parentesco\": 1,\r\n    \"id_expediente\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -677,15 +1175,116 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}{{path_host}}/api/v1/quincena/extraordinaria",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/contactoEmergencia",
 							"host": [
-								"{{host}}{{path_host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
-								"quincena",
-								"extraordinaria"
+								"contactoEmergencia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/contactoEmergencia/:id_expediente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/contactoEmergencia/1",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"contactoEmergencia",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/contactoEmergencia",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_contacto_emergencia\": 2,\r\n    \"nombre\": \"Juan Carlos\",\r\n    \"telefono\": \"3121421537\",\r\n    \"telefono_2\": null,\r\n    \"id_parentesco\": 1,\r\n    \"id_expediente\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/contactoEmergencia",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"contactoEmergencia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/contactoEmergencia/:id_contacto_emergencia",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/contactoEmergencia/2",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"contactoEmergencia",
+								"2"
 							]
 						}
 					},
@@ -694,22 +1293,1251 @@
 			]
 		},
 		{
-			"name": "Empleados",
+			"name": "Cursos",
 			"item": [
 				{
-					"name": "empleados",
+					"name": "v1/curso",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre_curso\" : \"Test\",\r\n    \"fecha_inicio\": \"2025-01-01\",\r\n    \"fecha_fin\": \"2025-02-01\",\r\n    \"capacitador\": \"Juan\",\r\n    \"duracion\": \"2 meses\",\r\n    \"id_expediente\": 1,\r\n    \"id_documento\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/curso",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"curso"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/cursos/:id_expediente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}{{path_host}}/api/v1/empleados",
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/cursos/1",
 							"host": [
-								"{{host}}{{path_host}}"
+								"{{HostURL}}"
 							],
 							"path": [
-								"api",
+								"{{pathHost}}api",
+								"index.php",
 								"v1",
-								"empleados"
+								"cursos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/curso",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_curso\": 1,\r\n    \"nombre_curso\" : \"Test 2\",\r\n    \"fecha_inicio\": \"2025-01-01\",\r\n    \"fecha_fin\": \"2025-02-01\",\r\n    \"capacitador\": \"Juan\",\r\n    \"duracion\": \"2 meses\",\r\n    \"id_documento\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/curso",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"curso"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/curso/:id_curso",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token - QA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/curso/0",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"curso",
+								"0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Familiares",
+			"item": [
+				{
+					"name": "v1/familiar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"curp\": \"SACA980129\",\r\n    \"nombre\": \"Angel\",\r\n    \"fecha_nacimiento\": \"1998-01-29\",\r\n    \"id_parentesco\": 1,\r\n    \"es_beneficiario\": 0,\r\n    \"porcentaje\": \"0.00\",\r\n    \"id_expediente\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/familiar",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"familiar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/familiar/:id_expediente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/familiar/1",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"familiar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/familiar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_familiar\": 1,\r\n    \"curp\": \"SACA980129\",\r\n    \"nombre\": \"Angel Gabriel\",\r\n    \"fecha_nacimiento\": \"1998-01-29\",\r\n    \"id_parentesco\": 1,\r\n    \"es_beneficiario\": 0,\r\n    \"porcentaje\": \"23.5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/familiar",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"familiar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/familiar/:id_familiar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/familiar/1",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"familiar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vacaciones",
+			"item": [
+				{
+					"name": "v1/vacaciones",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"derecho_vacaciones\": 1,\r\n    \"dias_vacaciones\": 12,\r\n    \"id_expediente\":  1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/vacaciones",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"vacaciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/vacaciones/:id_expediente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/vacaciones/33",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"vacaciones",
+								"33"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/vacaciones",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_vacaciones\": 1,\r\n    \"derecho_vacaciones\": 0,\r\n    \"dias_vacaciones\": 12\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/vacaciones",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"vacaciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/vacaciones/:id_vacaciones",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/vacaciones/1",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"vacaciones",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dias laborables",
+			"item": [
+				{
+					"name": "v1/diasLaborables/:id_expediente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/diasLaborables/1",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"diasLaborables",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/diasLaborables",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_expediente\": 1,\r\n    \"dia\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/diasLaborables",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"diasLaborables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/diasLaborables/:id_dia_laboral",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/diasLaborables/1",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"diasLaborables",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Solicitudes",
+			"item": [
+				{
+					"name": "v1/solicitud",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_persona\": 4,\r\n    \"id_expediente\": 1,\r\n    \"id_tipo_permiso\": 1,\r\n    \"fecha_inicio\": \"2025-01-2\",\r\n    \"fecha_fin\": \"2025-02-2\",\r\n    \"justificacion\": \"Test\",\r\n    \"validacion\": {\r\n        \"id_organigrama\": 2 \r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/solicitud",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"solicitud"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/solicitudes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/solicitudes",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"solicitudes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/solicitud/:id_solicitud/rh/rechazar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comentario\": \"Test reject all\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/solicitud/16/rh/rechazar",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"solicitud",
+								"16",
+								"rh",
+								"rechazar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/solicitud/:id_solicitud/rh/aprobar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/solicitud/5/rh/aprobar",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"solicitud",
+								"5",
+								"rh",
+								"aprobar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/solicitud/:id_solicitud/validadores",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/solicitud/5/validadores",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"solicitud",
+								"5",
+								"validadores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/solicitud/:id_solicitud/aprobar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_organigrama\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/solicitud/23/aprobar",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"solicitud",
+								"23",
+								"aprobar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/solicitud/:id_solicitud/rechazar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comentario\" : \"Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/solicitud/5/rechazar",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"solicitud",
+								"5",
+								"rechazar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/solicitud",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_solicitud\": 1,\r\n    \"id_tipo_permiso\": 1,\r\n    \"fecha_inicio\": \"2025-02-02\",\r\n    \"fecha_fin\": \"2025-01-02\",\r\n    \"hora_inicio\": null,\r\n    \"hora_fin\": null,\r\n    \"justifiacion\": \"Test 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/solicitud",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"solicitud"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/solicitudes/validar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/solicitudes/validar",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"solicitudes",
+								"validar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/solicitud/documento/firmado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_solicitud\":1,\r\n    \"id_documento_firmado\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/solicitud/documento/firmado",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"solicitud",
+								"documento",
+								"firmado"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Solicitud comentarios",
+			"item": [
+				{
+					"name": "v1/solicitud/:id_solicitud/comentarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/solicitud/5/comentarios",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"solicitud",
+								"5",
+								"comentarios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Documentos personales",
+			"item": [
+				{
+					"name": "v1/documentoPersonal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fecha_expedicion\": \"2025-05-06\",\r\n    \"fecha_vencimiento\": \"2026-05-06\",\r\n    \"id_documento\": 1,\r\n    \"id_tipo_documento\": 1,\r\n    \"id_expediente\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/documentoPersonal",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"documentoPersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/documentosPersonales/:id_expediente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/documentosPersonales/1",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"documentosPersonales",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/documentoPersonal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_documento_personal\": 1,\r\n    \"id_expediente\": 1,\r\n    \"fecha_expedicion\": \"2024-05-06\",\r\n    \"fecha_vencimiento\": \"2026-05-06\",\r\n    \"id_documento\": 1,\r\n    \"id_tipo_documento\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/documentoPersonal",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"documentoPersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/documentoPersonal/:id_documento_personal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/documentoPersonal/1",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"documentoPersonal",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Catalogo - Formato solicitud",
+			"item": [
+				{
+					"name": "v1/catalogo/datos/formato/solicitud",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"folio\": \"test\",\r\n    \"fecha_formato\": \"2025-01-02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/datos/formato/solicitud",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"catalogo",
+								"datos",
+								"formato",
+								"solicitud"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/catalogo/datos/formato/solicitud",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/datos/formato/solicitud",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"catalogo",
+								"datos",
+								"formato",
+								"solicitud"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/catalogo/datos/formato/solicitud",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"id_datos_formato\": 1,\r\n        \"id_api\": \"7\",\r\n        \"folio\": \"test 2\",\r\n        \"fecha_formato\": \"2025-01-02\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/datos/formato/solicitud",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"catalogo",
+								"datos",
+								"formato",
+								"solicitud"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/catalogo/datos/formato/solicitud/:id_datos_formato",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{QA - Token - PIS}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HostURL}}/{{pathHost}}api/index.php/v1/catalogo/datos/formato/solicitud/1",
+							"host": [
+								"{{HostURL}}"
+							],
+							"path": [
+								"{{pathHost}}api",
+								"index.php",
+								"v1",
+								"catalogo",
+								"datos",
+								"formato",
+								"solicitud",
+								"1"
 							]
 						}
 					},
@@ -743,12 +2571,12 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "https://vuamm.com.mx",
+			"value": "https://pis-web-eep-qa.azurewebsites.net",
 			"type": "string"
 		},
 		{
-			"key": "path_host",
-			"value": "/dev/nomina/back/",
+			"key": "pathHost",
+			"value": "services/",
 			"type": "string"
 		}
 	]

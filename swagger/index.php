@@ -1,9 +1,9 @@
 <?php
 // Ruta al archivo swagger.yaml
-$swaggerFile = 'swagger.yaml';
+// $swaggerFile = 'swagger.yaml';
 
-// Lee el contenido del archivo swagger.yaml
-$swaggerContent = file_get_contents($swaggerFile);
+// // Lee el contenido del archivo swagger.yaml
+// $swaggerContent = file_get_contents($swaggerFile);
 
 // Ruta al archivo JSON de Postman
 $jsonFile = 'postman.json';
