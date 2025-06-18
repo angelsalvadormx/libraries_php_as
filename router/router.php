@@ -183,7 +183,7 @@ class Router
         foreach ($routeUrlSplited as $key => $item) {
             if (strpos($item, ':') !== false) {
                 $valuePram = $currentURLSplited[$key];
-                $res = !empty($valuePram);
+                $res = isset($valuePram) && $valuePram !== '';
             }
         }
         return $res;
